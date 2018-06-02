@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Load TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <!-- Load Posenet -->
+    <script src="https://unpkg.com/@tensorflow-models/posenet"></script>
+</head>
+<body>
+    <img id="man"src="Groom-PNG.png"/>
+</body>
+<script>
+        var imageScaleFactor = 0.5;
+        var outputStride = 16;
+        var flipHorizontal = false;
+
+        var imageElement = document.getElementById("man");
+
+        posenet.load().then(function(net){
+            return net.estimateSinglePose(
+                    imageElement, 
+                    imageScaleFactor,
+                    flipHorizontal,
+                    outputStride)
+        }).then(function(pose){
+            console.log(pose);
+        });
+
+
+    </script>
+</html>
